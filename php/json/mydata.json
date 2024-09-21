@@ -1,0 +1,11 @@
+{
+    "roll":1,
+    "fname":"Khushboo",
+    "lname":"Kaneriya",
+    "city":"Rajkot",
+    "phone":"9876543210",
+    "gender":"Female",
+    "married": "true",
+    "joiningData": "2025/01/02",
+    "languages": ["English", "Hindi", "Gujarati"]
+}
