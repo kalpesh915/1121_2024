@@ -38,6 +38,7 @@ session_start();
 
     <div class="my-3" style="text-align: center;">
         <a href="register.php" class="btnsubmit">Create an Account</a>
+        <a href="forgot.php" class="btnsubmit">Forgot Password</a>
     </div>
 </body>
 </html>

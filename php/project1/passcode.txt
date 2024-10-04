@@ -1,0 +1,7 @@
+Open Gmail Account
+Click on Profile Photo
+go to "Manage your Account"
+Search for "App Password" Available in Security Tab
+Verify your account with Password
+Enter AppName and Create New App Password
+Copy newly Created Password to your SMTP Settings
