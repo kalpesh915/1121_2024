@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="op"></h1>
+</body>
+</html>
+
+<script>
+    let op = document.getElementById("op");
+
+    function printer(value){
+        op.innerHTML = value;
+    }
+
+    function makeSum(ip1, ip2){
+        let ans =  ip1 + ip2;
+        printer(ans);
+    }
+
+    makeSum(11, 22); // sequence 1
+</script>

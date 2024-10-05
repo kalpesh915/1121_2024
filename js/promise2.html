@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="op"></h1>
+  </body>
+</html>
+
+<script>
+  let op = document.getElementById("op");
+
+  function printer(value) {
+    op.innerHTML = value;
+  }
+
+  let checkAge = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Completed");
+    }, 3000);
+  });
+
+  checkAge.then(
+    /// resolve
+    (result) => {
+      printer(result);
+    },
+    /// reject
+    (error) => {
+      printer(error);
+    }
+  );
+</script>

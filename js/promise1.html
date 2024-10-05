@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="op"></h1>
+  </body>
+</html>
+
+<script>
+  let op = document.getElementById("op");
+
+  function printer(value) {
+    op.innerHTML = value;
+  }
+
+  let checkAge = new Promise((resolve, reject) => {
+    let age = parseInt(prompt("Enter your Age "));
+
+    if (age < 18) {
+      reject("Play Navratri till 12.00 AM");
+    } else {
+      resolve("Play Navratri till 3.00 AM");
+    }
+  });
+
+  checkAge.then(
+    /// resolve
+    (result) => {
+      printer(result);
+    },
+    /// reject
+    (error) => {
+      printer(error);
+    }
+  );
+</script>

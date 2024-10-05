@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="op"></h1>
+  </body>
+</html>
+
+<script>
+  let op = document.getElementById("op");
+
+  function printer(value) {
+    op.innerHTML = value;
+  }
+
+  async function readFile() {
+    let myPromise = new Promise((resolve, reject) => {
+      let xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("GET", "data.html");
+      xmlHttp.send();
+
+      xmlHttp.onload = function () {
+        if (xmlHttp.status == 200) {
+          resolve(xmlHttp.responseText);
+        } else {
+          reject("Error is " + xmlHttp.responseText);
+        }
+      };
+    });
+
+    printer(await myPromise);
+  }
+
+  readFile();
+</script>
