@@ -1,0 +1,64 @@
+.container{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.color1{
+    background-color: beige;
+}
+
+.color2{
+    background-color: aquamarine;
+}
+
+.color3{
+    background-color: turquoise;
+}
+
+.color4{
+    background-color: blanchedalmond;
+}
+
+.color5{
+    background-color:cadetblue;
+}
+
+.color6{
+    background-color:red;
+} 
+
+.heading{
+    background-color: olive;
+    color: white;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.content{
+    padding: 20px;
+    text-align: justify;
+    background-color: burlywood;
+    color: black;
+}
+
+nav ul{
+    width: 100%;
+    overflow: auto;
+    background-color: black;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+nav ul li{
+    float: left;
+}
+
+.nav-Link{
+    display: inline-block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
