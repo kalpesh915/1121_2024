@@ -8,6 +8,7 @@ import Contact from './Components/Contact';
 import Error404 from './Components/Error404';
 import Menu from './Components/Menu';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Greetings from './Components/Greetings';
 function App() {
   return (
     <div className="App">
@@ -15,12 +16,13 @@ function App() {
         <Menu></Menu>
 
         <Routes>
-          <Route path='/' element={<Home/>}></Route>
+          {/* <Route path='/' element={<Home/>}></Route>
           <Route path='/about' element={<About/>}></Route>
           <Route path='/services' element={<Services/>}></Route>
           <Route path='/feedback' element={<Feedback/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>
-          <Route path='*' element={<Error404/>}></Route>
+          <Route path='*' element={<Error404/>}></Route> */}
+          <Route path='/greetings/:id/:fname/:lname' element={<Greetings/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
