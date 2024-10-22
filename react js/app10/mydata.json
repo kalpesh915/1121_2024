@@ -1,22 +1,3 @@
 {
-  "students": [
-    {
-      "id": "b6b9",
-      "fname": "Khushbu",
-      "lname": "Kaneriya",
-      "city": "Ahemdabad",
-      "email": "khushbu@gmail.com",
-      "phone": "9988998899",
-      "gender": "female"
-    },
-    {
-      "id": "0202",
-      "fname": "khushboo",
-      "lname": "kaneriya",
-      "city": "ahamdabad",
-      "email": "khushi@gmail.com",
-      "phone": "9900990099",
-      "gender": "Female"
-    }
-  ]
+  "students": []
 }

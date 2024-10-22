@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 function CRUDAPI1() {
 
-    const APIURL = "http://localhost:3000/students/";
+    const APIURL = "http://localhost:3000/students";
 
     let [sid, setSid] = useState(0);
     let [fname, setFname] = useState("");
@@ -24,7 +24,7 @@ function CRUDAPI1() {
         setPhone("");
         setGender("");
         setStatus(true);
-        setLoading(true);
+        // setLoading(true);
     }
 
     useEffect(()=>{
@@ -62,7 +62,54 @@ function CRUDAPI1() {
             })
         }else{
             // update student
+            fetch(APIURL+"/"+sid, {
+                method: "PUT",
+                headers:{
+                    "Content-Type": "Appliation/json",
+                    "Accept": "Application/json"
+                },body: JSON.stringify({fname, lname, city, email, phone, gender})
+            }).then((response)=>{
+                response.json().then((result)=>{
+                    //console.log(result);
+                    resetForm();
+                    setLoading(true);
+                    loadAllStudentsData();
+                })
+            })
         }
+    }
+
+    // function for delete data
+    function deleteData(studentid){
+        // alert(studentid);
+        if(window.confirm("Are you sure to delete this Data ?")){
+            fetch(APIURL+"/"+studentid, {
+                method: "DELETE"
+            }).then((response)=>{
+                response.json().then((result)=>{
+                    //console.log(result);
+                    setLoading(true);
+                    loadAllStudentsData();
+                })
+            })
+        }
+    }
+
+    function getStudentDataForUpdate(studentid){
+        //alert(studentid);
+        fetch(APIURL+"/"+studentid).then((response)=>{
+            response.json().then((result)=>{
+                //console.log(result);
+                setSid(result.id);
+                setFname(result.fname);
+                setLname(result.lname);
+                setCity(result.city);
+                setEmail(result.email);
+                setPhone(result.phone);
+                setGender(result.gender);
+                setStatus(false);
+            });
+        });
     }
 
     return <>
@@ -137,8 +184,8 @@ function CRUDAPI1() {
                                         <td>{student.phone}</td>
                                         <td>{student.gender}</td>
                                         <td>
-                                            <button type="button" className="btn btn-danger"><i className="fa fa-trash"></i></button>
-                                            <button type="button" className="btn btn-primary mx-2">
+                                            <button type="button" className="btn btn-danger" onClick={()=>deleteData(student.id)}><i className="fa fa-trash"></i></button>
+                                            <button type="button" className="btn btn-primary mx-2" onClick={()=>getStudentDataForUpdate(student.id)}>
                                                 <i className="fa fa-pen"></i>
                                             </button>
                                         </td>
