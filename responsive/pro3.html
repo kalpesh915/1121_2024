@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            background-color: olive;
+        }
+
+        /* 
+            Media Query Rules 
+            min-width:700px = effect following code when screen size is at least 700px or more
+        */
+        @media screen and (min-width:700px){
+            body{
+                background-color: burlywood;
+            }
+        }
+
+        @media screen and (min-width:900px){
+            body{
+                background-color: orchid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="op"></h1>
+</body>
+</html>
+
+<script>
+    let op = document.getElementById("op");
+    window.addEventListener("resize", function(){
+        op.innerHTML = window.innerWidth;
+    })
+</script>
