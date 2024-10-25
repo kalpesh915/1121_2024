@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             } else {
                 $response = [
                     "code" => 500,
-                    "message" => "Error while Updating Data in Database"
+                    "message" => "No Data Update in Database"
                 ];
             }
         } else {
