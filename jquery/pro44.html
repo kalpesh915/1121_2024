@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td, th{
+            border-bottom: 1px solid black;
+        }
+
+        #searchText{
+            width: 100%;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body> 
+    <input type="search" id="searchText" placeholder="Search Here..">
+
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>City</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+
+        <tbody id="myTable">
+            <tr>
+                <td>1</td>
+                <td>Khushbu</td>
+                <td>Kaneriya</td>
+                <td>Rajkot</td>
+                <td>khushbu@gmail.com</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Aarti</td>
+                <td>Patel</td>
+                <td>Baroda</td>
+                <td>aarti@gmail.com</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Yashvi</td>
+                <td>Yadav</td>
+                <td>Junagadh</td>
+                <td>yashvi@gmail.com</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Smita</td>
+                <td>Patel</td>
+                <td>Amreli</td>
+                <td>smita@gmail.com</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Palak</td>
+                <td>Patel</td>
+                <td>Rajula</td>
+                <td>palak@gmail.com</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+<script>
+    $(document).ready(function(){
+        $("#searchText").on("keyup", function(){
+            let text = $(this).val().toLowerCase();
+            //alert(text);
+            $("#myTable tr").filter(function(){
+                $(this).toggle($(this).text().toLowerCase().indexOf(text) > -1)
+            });
+        });
+    });
+</script>

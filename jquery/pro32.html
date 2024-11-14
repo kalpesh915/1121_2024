@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        
+    </style>
+</head>
+<body> 
+    <h1>This is Heading 1</h1>
+    <h2>This is Heading 2</h2>
+    <h3>This is Heading 3</h3>
+    <h4>This is Heading 4</h4>
+    <h5>This is Heading 5</h5>
+    <h6>This is Heading 6</h6>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium laborum ad, quod culpa sit ipsam corrupti illo quia doloremque quae eligendi dolore cumque perspiciatis voluptatem sapiente assumenda suscipit perferendis tempore!</p>
+    <span>welcome to CSS</span>
+</body>
+</html>
+
+<script>
+    $(document).ready(function(){
+        $("h3").siblings("p").css("color", "red");
+    });
+</script>

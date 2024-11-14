@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        .style1{
+            height: 300px;
+            width: 500px;
+            border: 10px solid red;
+            background-color: black;
+            color: white;
+            padding: 20px;
+            margin: 20px;
+            text-align: justify;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body> 
+    <button id="btn1">Get Height / Width</button>
+    <button id="btn2">Get Inner Height / Width</button>
+    <button id="btn3">Get Outer Height / Width</button>
+    <button id="btn4">Get Outer (True) Height / Width</button>
+    <hr>
+    <p id="op" class="style1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia mollitia ducimus voluptate vitae, maxime reprehenderit pariatur doloremque quasi. Quod eos et accusamus distinctio! Excepturi iste optio deserunt tempora impedit quia?</p>
+</body>
+</html>
+
+<script>
+    $(document).ready(function(){
+        let op = $("#op");
+        $("#btn1").click(function(){
+            alert("Width is "+op.width()+" Height is "+op.height());
+        });
+        $("#btn2").click(function(){
+            alert("Width is "+op.innerWidth()+" Height is "+op.innerHeight());
+        });
+        $("#btn3").click(function(){
+            alert("Width is "+op.outerWidth()+" Height is "+op.outerHeight());
+        });
+        $("#btn4").click(function(){
+            alert("Width is "+op.outerWidth(true)+" Height is "+op.outerHeight(true));
+        });
+    });
+</script>
