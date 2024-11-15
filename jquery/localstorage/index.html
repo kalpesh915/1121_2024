@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="addData()">Add Data</button>
+    <button onclick="deleteData()">Delete Data</button>
+</body>
+</html>
+
+<script>
+    function addData(){
+        let fname = prompt("Enter First Name");
+        let lname = prompt("Enter Last Name");
+
+        localStorage.setItem("firstName", fname);
+        localStorage.setItem("lastName", lname);
+    }
+
+    function deleteData(){
+        localStorage.removeItem("firstName");
+        localStorage.removeItem("lastName");
+    }
+</script>
