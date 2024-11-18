@@ -1,5 +1,4 @@
 <?php
-
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
@@ -63,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // insert
     $data = json_decode(file_get_contents("php://input",), true);
-
+    //$data = $_POST;
     if (!empty($data["fname"]) && !empty($data["lname"]) && !empty($data["city"]) && !empty($data["email"]) && !empty($data["phone"]) && !empty($data["gender"])) {
         $data = filterData($data);
 
@@ -128,6 +127,5 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         "message" => "Only GET Method is Allowed on This Route"
     ];
 }
-
 
 echo json_encode($response);

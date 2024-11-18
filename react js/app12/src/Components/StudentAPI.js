@@ -1,8 +1,18 @@
 import alertify from 'alertifyjs';
 import { useEffect, useState } from 'react';
 import './student.css';
+import { useNavigate } from 'react-router-dom';
 
-function StudentAPI(){
+function StudentAPI() {
+    let navigate = useNavigate();
+    // check login
+    useEffect(() => {
+        let email = localStorage.getItem("email");
+        if (!email || email == "") {
+            alertify.error("Please Login First");
+            navigate("/");
+        }
+    }, []);
 
     const APIURL = "http://localhost/myapi/";
 
@@ -18,68 +28,68 @@ function StudentAPI(){
     let [error, setError] = useState("");
     let [studentsData, setStudentsData] = useState([]);
 
-    alertify.set('notifier','position', 'top-right');
+    alertify.set('notifier', 'position', 'top-right');
 
     // Function for Handle Form Submit for Insert or Update
-    function handleFormSubmit(evt){
+    function handleFormSubmit(evt) {
         evt.preventDefault();
 
-        if(action){
+        if (action) {
             // insert
             fetch(APIURL, {
-                method:"POST",
+                method: "POST",
                 headers: {
                     "Content-Type": "Application/json",
                     "Accept": "Application/json"
                 },
-                body: JSON.stringify({fname, lname, city, email, phone, gender })
-            }).then((response)=>{
-                response.json().then((result)=>{
+                body: JSON.stringify({ fname, lname, city, email, phone, gender })
+            }).then((response) => {
+                response.json().then((result) => {
                     //console.log(result);
-                    
-                    if(result.code === 200){
-                        alertify.success(result.message); 
+
+                    if (result.code === 200) {
+                        alertify.success(result.message);
                         loadAllStudentData();
                         resetForm();
-                    }else{
-                        alertify.error(result.message); 
+                    } else {
+                        alertify.error(result.message);
                     }
                 })
             })
-        }else{
+        } else {
             // update
-            fetch(APIURL+"?id="+studentID, {
-                method:"PUT",
-                headers:{
+            fetch(APIURL + "?id=" + studentID, {
+                method: "PUT",
+                headers: {
                     "Content-Type": "Application/json",
                     "Accept": "Application/json"
-                },body: JSON.stringify({fname, lname, city, email, phone, gender})
-            }).then((response)=>{
-                response.json().then((result)=>{
-                    if(result.code === 200){
+                }, body: JSON.stringify({ fname, lname, city, email, phone, gender })
+            }).then((response) => {
+                response.json().then((result) => {
+                    if (result.code === 200) {
                         //console.log(result);
-                        alertify.success(result.message); 
+                        alertify.success(result.message);
                         resetForm();
                         setLoading(true);
                         setAction(true);
                         loadAllStudentData();
-                    }else{
+                    } else {
                         console.log(result);
-                        alertify.error(result.message); 
+                        alertify.error(result.message);
                     }
                 });
             })
         }
-        
+
     }
 
 
-    function loadAllStudentData(){
-        fetch(APIURL,{
+    function loadAllStudentData() {
+        fetch(APIURL, {
             method: "GET"
-        }).then((response)=>{
-            response.json().then((result)=>{
-                if(result.code === 200){
+        }).then((response) => {
+            response.json().then((result) => {
+                if (result.code === 200) {
                     //console.log(result);
                     setLoading(false);
                     setStudentsData(result.data);
@@ -88,32 +98,32 @@ function StudentAPI(){
         })
     }
 
-    function deleteStudent(studentId){
-        if(window.confirm("Are you sure to delete this data ??")){
-            fetch(APIURL+"?id="+studentId,{
-                method:"DELETE"
-            }).then((response)=>{
-                response.json().then((result)=>{
+    function deleteStudent(studentId) {
+        if (window.confirm("Are you sure to delete this data ??")) {
+            fetch(APIURL + "?id=" + studentId, {
+                method: "DELETE"
+            }).then((response) => {
+                response.json().then((result) => {
                     //console.log(result);
-                    if(result.code === 200){
-                        alertify.success(result.message); 
+                    if (result.code === 200) {
+                        alertify.success(result.message);
                         setLoading(true);
                         loadAllStudentData();
-                    }else{
-                        alertify.error(result.message); 
+                    } else {
+                        alertify.error(result.message);
                     }
                 })
             });
         }
     }
 
-    function getDataForUpdate(studentId){
+    function getDataForUpdate(studentId) {
         //alert(studentId);
 
-        fetch(APIURL+"?id="+studentId).then((response)=>{
-            response.json().then((result)=>{
+        fetch(APIURL + "?id=" + studentId).then((response) => {
+            response.json().then((result) => {
                 //console.log(result);
-                if(result.code === 200){
+                if (result.code === 200) {
                     setStudentID(result.data.id);
                     setFname(result.data.fname);
                     setLname(result.data.lname);
@@ -122,19 +132,19 @@ function StudentAPI(){
                     setPhone(result.data.phone);
                     setGender(result.data.gender);
                     setAction(false);
-                }else{
-                    alertify.error(result.message); 
+                } else {
+                    alertify.error(result.message);
                 }
             });
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         loadAllStudentData();
     }, []);
 
 
-    function resetForm(){
+    function resetForm() {
         setFname("");
         setLname("");
         setCity("");
@@ -147,38 +157,44 @@ function StudentAPI(){
 
     return <>
         <div className='container-fluid'>
-            <h1 className='bg-primary text-white text-center p-2'>Student API Example with PHP MySql</h1>
+            <h1 className='bg-primary text-white text-center p-2'>Student API Example with PHP MySql <button className='float-end btn btn-danger' type='button' onClick={() => {
+                if (window.confirm("Are you sure to Logout ??")) {
+                    localStorage.removeItem("email");
+                    navigate("/");
+                }
+
+            }}>Logout</button></h1>
 
             <div className='row'>
                 <div className='col-md-3'>
                     <form onSubmit={handleFormSubmit}>
                         <div className='my-2 form-floating'>
-                            <input type='text' name='fname' id='fname' required placeholder='Enter First Name' className='form-control' onChange={(e)=>setFname(e.target.value)} value={fname}></input>
+                            <input type='text' name='fname' id='fname' required placeholder='Enter First Name' className='form-control' onChange={(e) => setFname(e.target.value)} value={fname}></input>
                             <label className='form-label' htmlFor='fname'>Enter First Name</label>
                         </div>
 
                         <div className='my-2 form-floating'>
-                            <input type='text' name='lname' id='lname' required placeholder='Enter Last Name' className='form-control' onChange={(e)=>setLname(e.target.value)} value={lname}></input>
+                            <input type='text' name='lname' id='lname' required placeholder='Enter Last Name' className='form-control' onChange={(e) => setLname(e.target.value)} value={lname}></input>
                             <label className='form-label' htmlFor='lname'>Enter Last Name</label>
                         </div>
 
                         <div className='my-2 form-floating'>
-                            <input type='text' name='city' id='city' required placeholder='Enter City Name' className='form-control' onChange={(e)=>setCity(e.target.value)} value={city}></input>
+                            <input type='text' name='city' id='city' required placeholder='Enter City Name' className='form-control' onChange={(e) => setCity(e.target.value)} value={city}></input>
                             <label className='form-label' htmlFor='city'>Enter City Name</label>
                         </div>
 
                         <div className='my-2 form-floating'>
-                            <input type='email' name='email' id='email' required placeholder='Enter Email Address' className='form-control' onChange={(e)=>setEmail(e.target.value)} value={email}></input>
+                            <input type='email' name='email' id='email' required placeholder='Enter Email Address' className='form-control' onChange={(e) => setEmail(e.target.value)} value={email}></input>
                             <label className='form-label' htmlFor='email'>Enter Email Address</label>
                         </div>
 
                         <div className='my-2 form-floating'>
-                            <input type='text' name='phone' id='phone' required placeholder='Enter Phone Number' className='form-control' onChange={(e)=>setPhone(e.target.value)} value={phone}></input>
+                            <input type='text' name='phone' id='phone' required placeholder='Enter Phone Number' className='form-control' onChange={(e) => setPhone(e.target.value)} value={phone}></input>
                             <label className='form-label' htmlFor='phone'>Enter Phone Number</label>
                         </div>
 
                         <div className='my-2 form-floating'>
-                            <select name='gender' id='gender' required  className="form-select" placeholder="Select Gender" onChange={(e)=>setGender(e.target.value)} value={gender}>
+                            <select name='gender' id='gender' required className="form-select" placeholder="Select Gender" onChange={(e) => setGender(e.target.value)} value={gender}>
                                 <option></option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -187,15 +203,15 @@ function StudentAPI(){
                         </div>
 
                         <div className='my-2 text-center'>
-                            <input type='submit' value={action ? "Add New Student" : "Update Student"} className='btn btn-primary'/>
-                            <input type='reset' value="Reset" className='btn btn-danger mx-2' onClick={()=> resetForm()} />
+                            <input type='submit' value={action ? "Add New Student" : "Update Student"} className='btn btn-primary' />
+                            <input type='reset' value="Reset" className='btn btn-danger mx-2' onClick={() => resetForm()} />
                         </div>
                     </form>
                 </div>
 
                 <div className='col-md-9'>
                     {
-                        loading ? <p className='text-center'><span className='spinner-border spinner-border-sm'></span> Loading... </p>: ""
+                        loading ? <p className='text-center'><span className='spinner-border spinner-border-sm'></span> Loading... </p> : ""
                     }
                     <div className='table-responsive'>
                         <table className='table table-hover table-striped'>
@@ -223,8 +239,8 @@ function StudentAPI(){
                                         <td>{student.phone}</td>
                                         <td>{student.gender}</td>
                                         <td>
-                                            <button className='btn btn-danger' onClick={()=>{deleteStudent(student.id)}}><i className='fa fa-trash'></i></button>
-                                            <button className='btn btn-primary mx-2' onClick={()=>{
+                                            <button className='btn btn-danger' onClick={() => { deleteStudent(student.id) }}><i className='fa fa-trash'></i></button>
+                                            <button className='btn btn-primary mx-2' onClick={() => {
                                                 getDataForUpdate(student.id)
                                             }}><i className='fa fa-pen'></i></button>
                                         </td>
